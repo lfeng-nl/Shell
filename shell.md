@@ -111,6 +111,17 @@ shell中使用`test`或`[ ]`命令来进行判断，可以对==文件类型==和
   done
   ```
 
+### 1.特殊控制语句
+
+```shell
+-e filename  如果filename存在，则为真
+-d filename  如果filename为目录，则为真
+-f filename  如果filename为常规文件，则为真
+-r filename  如果filename可读，则为真
+-w filename  如果filename可写，则为真
+-x filename  如果filename可执行，则为真
+```
+
 ## 5.函数
 
 - 使用`function`定义函数

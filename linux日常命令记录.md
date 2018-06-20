@@ -66,11 +66,65 @@
 
   - 常用：`ps aux|less ..., ps aux|grep ...` 
 
-## 2.文件处理相关
+## 2.磁盘和文件处理
 
-
+### 1.文件查看
 
 - tail ：输出文件末尾部分
   - `-f`：当文件增长时，输出后续添加的内容；
   - `-s`：与`-f`配合，表示在每次反复的间隔休眠s秒；
   - `-n`：输出最后N行，（不指定默认输出10行）；
+- `less`：查看整个文件，通`more`类似，但也可向前向后查看文件；
+  - `-N`：显示行号；
+
+### 2.du和df
+
+- du：查看文件所占空间；`du -h file`
+- df：显示磁盘空间，`df -h`
+
+### 3.fdisk :查看，创建，维护分区表
+
+- 选项：
+  - `-l`： 列出所有分区；
+
+## 3.文件传输
+
+### 1.sz，rz:
+
+>服务器一般都是通过ssh客户端进行远程登录和管理的，可以使用sz，和rz，在本地和服务器之间进行文件交换；
+>
+>sz：将选定的文件发送（send）到本地机器    rz：运行该命令会弹出一个文件选择窗口，从本地选择文件上传到服务器(receive)  ；
+
+- 安装：`yum install lrzsz -y `；
+- 上传：`rz`，上传也也已直接拖动文件到ssh客户端窗口，选择zmodem；
+- 下载：`sz`
+- 缺点：传输速度低
+
+### 2.scp ：secure copy
+
+> 基于ssh登录
+
+- 从本地复制到远端：`scp local_file remote_username@remote_ip:remote_folder `
+- 从远端复制到本地：`scp remote_username@remote_ip:remote_folder local_file `
+- 可选参数：
+  - `-v`：显示进度；
+  - `-P`：选择端口；
+
+### 3.sftp：secure file transfer program
+
+> 交互式文件传输，
+
+- 登录：`sftp -P port user@host`
+- 登录后的常用操作：
+  - `help`：查看可用命令；
+  - `pwd` ： 查看远程服务器当前目录；
+  - `lpwd`：  查看本地系统的当前目录。
+  - `cd <dir>` ：  将远程服务器的当前目录更改为<dir>；
+  - `lcd <dir> `： 将本地系统的当前目录更改为<dir>。
+  - `ls` ：显示远程服务器上当前目录的文件名；
+  - `lls`： 显示本地系统上当前目录的文件名；
+  - `get <file>` ：下载指定文件<file>；
+  - `put <file>`： 上传指定文件<file>；
+
+4.
+

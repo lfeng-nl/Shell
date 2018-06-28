@@ -6,7 +6,9 @@
 >
 >2.service xxx start，用于控制`/etc/init.d`目录下的脚本文件名；
 
-###1.`systemd`相关命令，关于systemd更多请了解 [阮一峰](http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html)
+###1.`systemd`相关命令
+
+> 关于systemd更多请了解 [阮一峰](http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html)
 
 - Systemd 可以管理所有的系统资源，不同的资源统称为Unit；
 
@@ -126,5 +128,12 @@
   - `get <file>` ：下载指定文件<file>；
   - `put <file>`： 上传指定文件<file>；
 
-4.
+## 4.脚本相关
+
+### 1.set 修改shell环境的运行参数
+
+- `set -u`：遇到不存在的变量就会报错，并停止执行；
+- `set -x`：运行结果之前，先输出执行的那一行命令；
+- `set -e`：根据返回值判断命令是否执行失败，失败则脚本停止执行；
+- `set -o pipefail`：针对管道，当管道中只要有一个命令执行失败，脚本就会终止执行；
 

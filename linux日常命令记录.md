@@ -6,7 +6,7 @@
 >
 >2.service xxx start，用于控制`/etc/init.d`目录下的脚本文件名；
 
-###1.`systemd`相关命令
+### 1.`systemd`相关命令
 
 > 关于systemd更多请了解 [阮一峰](http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html)
 
@@ -185,7 +185,16 @@
 
 ### 3.traceroute
 
+### 4.curl 网络文件传输
 
+- `-i`: 显示头部和网页信息;
+- `-X`: 设置请求方式, 默认为GET;   
+- `--referer`: 设置referer信息;
+- `--user-agent`: 设置User Agent信息;
+- `--cookie`: 设置cookie信息, `--cookie "name=xxx" [url]`;
+- `-c cookies_file [url]`: 保存信息到cookie_file;
+- `-H, --header`:  设置头部信息, `-H "Content-Type:application/json" [url]`;
+- `-d --data`: 向服务器传输数据; `content type`为 `application/x-www-form-urlencoded`;
 
 ## 6.文本处理
 

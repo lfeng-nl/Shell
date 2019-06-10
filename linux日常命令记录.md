@@ -229,6 +229,11 @@
 - `-H, --header`:  设置头部信息, `-H "Content-Type:application/json" [url]`;
 - `-d --data`: 向服务器传输数据; `content type`为 `application/x-www-form-urlencoded`;
 
+### 5.ssh
+
+- 使用`pam_abl`模块防止暴力破解, [参考](<http://www.hexten.net/assets/pam_abl_doc/index.html>)；
+  - `pam_abl --okhost=HOST`: 不阻止指定地址;
+
 ## 6.文本处理
 
 ### 1.awk

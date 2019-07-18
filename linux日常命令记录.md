@@ -100,6 +100,10 @@
   - `su` : 更改用户ID, 默认更改为root用户;
   - `exit`: 退出当前登录用户到上一个用户;
 
+### 5.audit 审计工具
+
+
+
 ## 2.磁盘和文件
 
 ### 1.文件查看
@@ -194,17 +198,15 @@
 
 ## 5.网络相关
 
-### 1.netstat  查看网络信息
+### 1.`netstat ` 查看网络信息
 
 - 参数
-  - -a (all)显示所有选项，默认不显示LISTEN相关
-  - -t (tcp)仅显示tcp相关选项
-  - -u (udp)仅显示udp相关选项
-  - -n 拒绝显示别名，能显示数字的全部转化成数字(如端口号,不显示对应服务)。
-  - -l 仅列出有在 Listen (监听) 的服務状态
-  - -p 显示建立相关链接的程序名
-  - -r 显示路由信息，路由表
-  - -c 持续输出
+  - `-a` (all)显示所有选项，默认不显示LISTEN相关
+  - `-t, -u, -x`: 仅显示tcp(udp, unix套接字)相关选项
+  - `-n` : 拒绝显示别名，能显示数字的全部转化成数字(如端口号,不显示对应服务)。
+  - `-l`:  仅列出有在 Listen (监听) 的服務状态
+  - `-p`:  显示建立相关链接的程序名
+  - `-c`:  持续输出
 - 如查询端口占用`netstat -anp|less,  netstat -anp|grep 9090`
 
 ### 2.路由相关
@@ -216,9 +218,16 @@
 - `route [add|del][-net|-host] target [netmask Nm][gw Gw] [[dev] If]`: 添加或删除路由;
   - 例如`route add -net 10.20.30.48 netmask 255.255.255.248 gw 10.20.30.41 #添加10.20.30.48的网络`;
 
-### 3.traceroute
+### 3.`traceroute` 网络测试
 
-### 4.curl 网络文件传输
+- `tranceroute [参数] [主机]`
+  - `-m`: 设置TTL的大小;
+  - `-n`: 直接使用IP, 而不是主机名;
+  - `-q`: 发送探测包的次数, 默认3次;
+  - `-w`: 设置远程主机的回报时间;
+- 输出记录中的每一条代表一跳, 表示一个网关;
+
+### 4.`curl` 网络文件传输
 
 - `-i`: 显示头部和网页信息;
 - `-X`: 设置请求方式, 默认为GET;   
@@ -229,18 +238,34 @@
 - `-H, --header`:  设置头部信息, `-H "Content-Type:application/json" [url]`;
 - `-d --data`: 向服务器传输数据; `content type`为 `application/x-www-form-urlencoded`;
 
-### 5.ssh
+### 5.`ssh`
 
 - 使用`pam_abl`模块防止暴力破解, [参考](<http://www.hexten.net/assets/pam_abl_doc/index.html>)；
   - `pam_abl --okhost=HOST`: 不阻止指定地址;
 
-## 6.文本处理
+### 6.`ss`  查询socket的统计信息, netstat的高效指令
 
-### 1.awk
+- `ss [参数] [过滤]`
+  - `-t, -u, -x`: 仅显示 TCP(UDP, UNIX)套接字;
+  - `-l`: 列出所有打开的网络连接端口;
+  - `-p`: 显示使用套接字的进程信息；
+  - `-m`: 显示套接字的内存使用情况；
+  - `-a`: 显示所有套接字;
+  - `-n`: 端口以数字显示, 不显示别名;
+
+## 6.通用
+
+### 1.awk 文本处理
 
 - `awk '{pattern + action}' {filenames}`：pattern 表示在数据中查找的内容，action是在匹配到查找内容时所执行的命令；
   - 如：`awk '{print $0}' /etc/passwd`，将`/etc/passwd`作为输入文件，每一行作为参数，指向指令；
   - `-F":"` ：指定分隔符；
+
+### 2.wc 计算字数
+
+- `-c`: 打印byte数;
+- `-l`: 打印行数;
+- `-w`: 打印字数;
 
 ## 7.性能
 

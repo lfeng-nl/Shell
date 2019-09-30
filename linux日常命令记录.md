@@ -264,6 +264,46 @@
   - `-a`: 显示所有套接字;
   - `-n`: 端口以数字显示, 不显示别名;
 
+### 7. `ip`展示/设置路由, 策略路由, 隧道
+
+> `ip [options] object {COMMAND|help}`
+>
+> object := { **link** | **addr** | **addrlabel** | **route** | **rule** | **neigh** | **tunnel** | **maddr** | **mroute** | **monitor** }
+>
+> options:= { **-V**[*ersion*] | **-s**[*tatistics*] | **-r**[*esolve*] | **-f**[*amily*] { **inet** | **inet6** | **ipx** | **dnet** | **link** } | **-o**[*neline*] }
+
+- `ip link`: 显示链路层信息, 激活/停用接口, 更改链路层状态, 等;
+
+  - `ip link show`: 显示链接层特征;
+  - `ip link set down/up`: 
+  - `ip link add`: 添加虚拟链接
+    - `ip link add 
+
+- `ip address`: 协议地址管理
+
+  - `ip address shwo`: 显示地址信息
+  - `ip address add `: 添加ip;
+  - `ip address del `: 删除ip;
+
+- `ip route`: 路由表管理;
+
+- `ip rule`: 策略路由管理;
+
+- `ip netns`: 网络命名空间管理:
+
+  - `ip netns list`: 显示所有网络命名空间
+  - `ip netns add NAME`: 创建一个网络命名空间;
+  - `ip netns delete NAME`: 删除一个网络命名空间;
+
+  - `ip netns exec [NAME] cmd`: 在一个网络命名空间中执行命令; 例如:
+    - `ip netns exec NAME ip a`: 查看命名空间的网络信息;
+
+- 
+
+### 8.`brctl`
+
+- `brctl show`: 
+
 ## 6.通用
 
 ### 1.awk 文本处理

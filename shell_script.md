@@ -1,14 +1,14 @@
-# 本文介绍shel及shell脚本相关问题
+# 本文介绍shell脚本相关问题
 
-## 1.shell基础
+## 1.基础
 
-- exit：确保脚本程序能够返回一个有意义的退出码。 
+- `exit`：确保脚本程序能够返回一个有意义的退出码。 
 
 ## 2.变量
 
 - shell 中的变量无须事先声明，默认情况下，所有变量都被认为是字符串类型；注意变量的赋值，`=`号前后无空格：
 
-  ```shell
+  ```sh
   test="Hi lfeng"
   ```
 
@@ -16,7 +16,7 @@
 
 - 单引号和双引号：单引号的`$`变量名不会读取变量内容，双引号会读取`$`后的变量内容；
 
-  ```shell
+  ```sh
   #!/bin/bash
   test="Hi lfeng"
   echo "$test"			
@@ -50,7 +50,7 @@ shell中使用`test`或`[ ]`命令来进行判断，可以对==文件类型==和
 
 - 字符串比较
 
-  ```shell
+  ```sh
   string1 = string2
   #相等为真
   string1 != string2
@@ -63,7 +63,7 @@ shell中使用`test`或`[ ]`命令来进行判断，可以对==文件类型==和
 
 - 算数比较
 
-  ```shell
+  ```sh
   expression1 -eq expression2
   # 两个表达式相等为真
   expression1 -ne expression2
@@ -81,16 +81,16 @@ shell中使用`test`或`[ ]`命令来进行判断，可以对==文件类型==和
 
 - 文件测试
 
-  ```shell
+  ```sh
   -f file
   # 文件是否存在
   ```
 
-##4.控制语句
+## 4.控制语句
 
   - if语句
 
-    ```shell
+    ```sh
     if [...]
     then
         ...
@@ -104,7 +104,7 @@ shell中使用`test`或`[ ]`命令来进行判断，可以对==文件类型==和
 
 - for语句
 
-  ```shell
+  ```sh
   for variable in values
   do
   	...
@@ -113,7 +113,7 @@ shell中使用`test`或`[ ]`命令来进行判断，可以对==文件类型==和
 
 ### 1.特殊控制语句
 
-```shell
+```sh
 -e filename  如果filename存在，则为真
 -d filename  如果filename为目录，则为真
 -f filename  如果filename为常规文件，则为真
@@ -133,7 +133,7 @@ shell中使用`test`或`[ ]`命令来进行判断，可以对==文件类型==和
 
 - 使用`function`定义函数
 
-  ```shell
+  ```sh
   function name{
     commands
   }
@@ -141,7 +141,7 @@ shell中使用`test`或`[ ]`命令来进行判断，可以对==文件类型==和
 
 - 直接定义
 
-  ```shell
+  ```sh
   name(){
     commands
   }
@@ -156,3 +156,42 @@ shell中使用`test`或`[ ]`命令来进行判断，可以对==文件类型==和
 
 - `n >& m`: 将输出到n的内容重定向到m
 - 例: `1 > /dev/null`: 丢弃标准输出, 2 >& 1`: 将标准错误输出合并到标准输出;
+
+## 8.调试
+
+- `sh -n <script>`: 只检查语法, 不执行命令;
+- `sh -v <script>`: 执行命令前回显;
+- `sh -x <script>`: 在处理完命令之后回显;
+- `sh -u <script>`: 如果使用了未定义变量, 给出出错消息;
+
+## 9.特殊用法
+
+### 1.mktemp
+
+> 创建临时文件或者临时目录, 并打印其名称.
+
+```sh
+TEMPFILE=$(mktemp) || exit 1
+```
+
+- 参数:
+  - `-d`: 创建目录;
+  - `-p`: 指定临时文件所在的目录;
+  - `-t`: 指定文件名称模板`tmpname.XXXXXX`, XXXX最终会被随机字符替代.
+
+### 2.trap
+
+> 响应系统信号
+>
+> trap [动作] [信息]
+
+```sh
+# HUP：编号1，脚本与所在的终端脱离联系。
+# INT：编号2，用户按下 Ctrl + C，意图让脚本中止运行。
+# QUIT：编号3，用户按下 Ctrl + 斜杠，意图退出脚本。
+# KILL：编号9，该信号用于杀死进程。
+# TERM：编号15，这是kill命令发出的默认信号。
+# EXIT：编号0，这不是系统信号，而是 Bash 脚本特有的信号，不管什么情况，只要退出脚本就会产生。
+
+trap 'rm -rf "$TEMPFILE"' EXIT
+```

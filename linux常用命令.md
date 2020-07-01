@@ -272,7 +272,7 @@
 - `route [add|del][-net|-host] target [netmask Nm][gw Gw] [[dev] If]`: 添加或删除路由;
   - 例如`route add -net 10.20.30.48 netmask 255.255.255.248 gw 10.20.30.41 #添加10.20.30.48的网络`;
 
-### 3.`traceroute` 网络测试
+### 4.`traceroute` 网络测试
 
 - `tranceroute [参数] [主机]`
   - `-m`: 设置TTL的大小;
@@ -281,7 +281,7 @@
   - `-w`: 设置远程主机的回报时间;
 - 输出记录中的每一条代表一跳, 表示一个网关;
 
-### 4.`curl` 网络文件传输
+### 5.`curl` 网络文件传输
 
 - `-i`: 显示头部和网页信息;
 - `-X`: 设置请求方式, 默认为GET;   
@@ -292,12 +292,12 @@
 - `-H, --header`:  设置头部信息, `-H "Content-Type:application/json" [url]`;
 - `-d --data`: 向服务器传输数据; `content type`为 `application/x-www-form-urlencoded`;
 
-### 5.`ssh`
+### 6.`ssh`
 
 - 使用`pam_abl`模块防止暴力破解, [参考](<http://www.hexten.net/assets/pam_abl_doc/index.html>)；
   - `pam_abl --okhost=HOST`: 不阻止指定地址;
 
-### 6.`ss`  查询socket的统计信息, netstat的高效指令
+### 7.`ss`  查询socket的统计信息, netstat的高效指令
 
 - `ss [参数] [过滤]`
   - `-t, -u, -x`: 仅显示 TCP(UDP, UNIX)套接字;
@@ -307,7 +307,7 @@
   - `-a`: 显示所有套接字;
   - `-n`: 端口以数字显示, 不显示别名;
 
-### 7. `ip`展示/设置路由, 策略路由, 隧道
+### 8. `ip`展示/设置路由, 策略路由, 隧道
 
 > `ip [options] object {COMMAND|help}`
 >
@@ -343,13 +343,36 @@
 
 - 
 
-### 8.`brctl`网桥管理工具
+### 9.`brctl`网桥管理工具
 
 - 安装: `yum install bridge-utils, apt-get install bridge-utils`
 
 - `brctl show`: 显示所有的网桥信息;
 - `brctl addbr xxx`: 创建网桥
-- 
+
+### 10. `socat`多用途中继器
+
+> 在两个数据流之间建立通道, 且支持众多协议和连接方式: `ip, tcp, udp, ipv6, pipe, exec, system, open, proxy, openssl, socket`
+>
+> [参考](http://www.dest-unreach.org/socat/doc/socat.html)
+
+```shell
+socat [options] <address> <address>
+# 在两个address间建立一个pipe用于发送和接收数据
+# address有以下几种形式
+# 1.-, STDIN, STDOUT : 标准输入输出
+# 2. /xx/xx/xxx: 文件路径
+# 3. TCP:ip:port :TCP连接
+# 4. TCP-LISTEN:port : TCP监听
+```
+
+- 实例
+    - 转发TCP `socat -d -d -lf /var/log
+
+### 11.`ping & telnet`网络/服务是否可达
+
+- `ping ip`: 测试网络是否可达;
+- `telnet ip port`: 测试远端服务是否可达;
 
 ## 6.通用
 

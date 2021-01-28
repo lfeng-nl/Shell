@@ -411,6 +411,7 @@ socat [options] <address> <address>
 - `-c`: 打印byte数;
 - `-l`: 打印行数;
 - `-w`: 打印字数;
+- `ll *.py|wc -l`: 统计当前路径下的`.py`文件数.
 
 ## 7.性能
 

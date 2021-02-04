@@ -60,7 +60,7 @@
 - `[xxx]`: 匹配括号中的任意一个字符,
 - `[^xxx], [!xxx]`: 表示匹配不在方括号里面的字符,
 
-## 2.系统管理相关
+## 2.软件调试和系统
 
 >1.[Linux的启动流程](http://www.ruanyifeng.com/blog/2013/08/linux_boot_process.html)；
 >
@@ -187,6 +187,10 @@
         - `-e strace=signal` 跟踪所有与系统信号有关的 系统调用
     -   `-e trace=ipc` 跟踪所有与进程通讯有关的系统调用
     -   `-p pid`: 指定进程.
+
+### 8.`pstack`: 跟踪进程栈 print stack
+
+- `pstack pid`: 显示进程的调用栈.
 
 ## 3.文件传输
 
